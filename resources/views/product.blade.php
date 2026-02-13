@@ -3,8 +3,12 @@
 @section('content')
 <div class="bg-white rounded-lg shadow p-6">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="h-64 bg-gray-100 rounded flex items-center justify-center">
-            <span class="text-gray-400 text-sm">No image</span>
+        <div class="h-64 bg-gray-100 rounded flex items-center justify-center overflow-hidden">
+            @if ($product->image)
+                <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
+            @else
+                <span class="text-gray-400 text-sm">No image</span>
+            @endif
         </div>
 
         <div>

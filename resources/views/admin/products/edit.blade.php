@@ -11,7 +11,7 @@
     </ul>
 @endif
 
-<form method="POST" action="{{ route('admin.products.update', $product->id) }}">
+<form method="POST" action="{{ route('admin.products.update', $product->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -31,8 +31,8 @@
     </div>
 
     <div>
-        <label>Image (URL or path)</label><br>
-        <input type="text" name="image" value="{{ old('image', $product->image) }}">
+        <label>Image</label><br>
+        <input type="file" name="image" accept="image/*">
     </div>
 
     <div>

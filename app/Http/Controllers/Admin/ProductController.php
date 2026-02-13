@@ -25,9 +25,13 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'category' => 'nullable|string|max:255',
             'price' => 'required|numeric|min:0',
-            'image' => 'nullable|string|max:255',
+            'image' => 'nullable|image|max:2048',
             'description' => 'nullable|string',
         ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
 
         Product::create($data);
 
@@ -48,9 +52,15 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'category' => 'nullable|string|max:255',
             'price' => 'required|numeric|min:0',
-            'image' => 'nullable|string|max:255',
+            'image' => 'nullable|image|max:2048',
             'description' => 'nullable|string',
         ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('products', 'public');
+        } else {
+            unset($data['image']);
+        }
 
         $product->update($data);
 
